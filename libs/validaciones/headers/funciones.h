@@ -13,3 +13,8 @@ void ejercicio4();
 //ejercicio7
 void ejercicio7();
 char* ondaDigitalRec(char *palabra, int inicio, int final, char *senal);
+
+
+//Ejercicio 10
+void ejercicio10();
+void explosionRec(int n, int b, int *resultado, int *pos);

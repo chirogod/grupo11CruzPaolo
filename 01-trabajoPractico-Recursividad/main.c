@@ -11,7 +11,7 @@ int main(){
         printf("3)Fibonacci\n");
         printf("4)Division mediante restas sucesivas\n");
         printf("7)Onda digital\n");
-        printf("Ingrese el ejercicio al que ingresar('0' PARA SALIR): ");
+        printf("Ingrese el ejercicio al que ingresar('0' PARA SALIR):");
         scanf("%d", &ejercicio);
         switch(ejercicio){
             case 0:
@@ -32,8 +32,16 @@ int main(){
             case 7:
                 ejercicio7();
                 break;
+            case 9:
+                ejercicio9();
+                break;
+            case 10: {
+                ejercicio10();
+                break;
+            }
+
             default:
-                printf("Ese ejercicio no existe, solo del 1 al 10.");
+                printf("Ese ejercicio no existe, solo del 1 al 10.\n\n");
 
         }
 

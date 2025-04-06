@@ -1,4 +1,5 @@
 #include "../headers/funciones.h"
+//Ejercicio 1
 bool palindromoRec(char *palabra, int inicio, int final){
     if(inicio>= final){
         return true;
@@ -22,6 +23,7 @@ void ejercicio1(){
     free(palabra);
 }
 
+//Ejercicio 2
 void ejercicio2(){
     int m,n;
     printf("Bienvenido al ejercicio del producto por sumas sucesivas!\n Ingrese el multiplicando: ");
@@ -32,6 +34,7 @@ void ejercicio2(){
     printf("El resultado de multiplicar %d por %d mediante sumas sucesivas es: %d\n\n",m,n,resultado);
 }
 
+//Ejercicio 3
 void ejercicio3(){
     int m;
     printf("Bienvenido al ejercicio del termino de fibonacci!\n Ingrese el termino a saber: ");
@@ -39,7 +42,7 @@ void ejercicio3(){
     int resultado = terminoSeridFibonacci(m);
     printf("El %d-termino de la serie de fibonacci es %d\n\n", m,resultado);
 }
-
+//Ejercicio 4
 void ejercicio4(){
     int m,n;
     printf("Bienvenido al ejercicio de division por restas sucesivas!\n Ingrese el primer factor: ");
@@ -84,4 +87,43 @@ char* ondaDigitalRec(char *palabra, int inicio, int final, char *senal){
         ejercicio7();
     }
     return ondaDigitalRec(palabra,inicio+1, final, senal);
+}
+
+//Ejercicio 9
+void ejercicio9(){
+    int n;
+    printf("Bienvenido al ejercicio de divisible por 7!\n Ingrese el numero a saber: ");
+    scanf("%d", &n);
+    if(divisiblePor7(n)){
+        printf("'%d' SI es divisible por 7\n", n);
+    }else{
+        printf("'%d' NO es divisible por 7\n", n);
+    }
+}
+
+//Ejercicio 10
+void ejercicio10(){
+    int n,b;
+    printf("Bienvenido al ejercicio del numero explosivo!\n Ingrese el numero: ");
+    scanf("%d", &n);
+    printf(" Ingrese la bomba: ");
+    scanf("%d", &b);
+    int *resultado = explosion(n,b);
+    printf("[");
+    for(int i = 0; i<100 && resultado[i]!=0;i++){
+
+        printf(" %d ", resultado[i]);
+
+    }
+    printf("]\n\n");
+}
+void explosionRec(int n, int b, int *resultado, int *pos) {
+    if (n <= b) {
+        resultado[(*pos)++] = n;
+    } else {
+        int n1 = n / b;
+        int n2 = n - n1;
+        explosionRec(n1, b, resultado, pos);
+        explosionRec(n2, b, resultado, pos);
+    }
 }
