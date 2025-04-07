@@ -57,7 +57,7 @@ char * reunionMafia(int nivel);
 
 
 //ejercicio 7
-/*8.	Se tiene una cadena que representa una onda digital de señales L (Low) y H (High). Se pide mostrar
+/*7.	Se tiene una cadena que representa una onda digital de señales L (Low) y H (High). Se pide mostrar
 la onda que representa utilizando “_” y “|”.
 
 Ejemplo: Si se tiene la cadena HHHHLLLLHHHHHLLHHLL, su onda digital se puede ver algo así:

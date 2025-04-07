@@ -5,7 +5,6 @@ bool palindromo(char *cadena){
     int longitud = strlen(cadena);
     return palindromoRec(cadena,0,longitud-1);
 }
-
 // Ejercicio 2
 /*2.	Dados dos números enteros m y n, construir una función recursiva que devuelva
 el producto de ambos, calculando el mismo como sumas sucesivas. Esto es: m*n=m+m+...+m, n veces. */
@@ -33,22 +32,55 @@ int terminoSeridFibonacci(int k){
 cociente de ambos, calculando el mismo mediante restas sucesivas. Se deberá tener en cuenta que en el caso
 de que la división no sea exacta, se devolverán hasta 4 cifras decimales (si es necesario). */
 float division(int m, int n) {
-    if (m < n) {
-        static int profundidad = 0;
+    // Manejo de signos
+    int signo = 1;
+    if (m < 0 && n > 0) signo = -1;
+    else if (m > 0 && n < 0) signo = -1;
 
-        if (profundidad == 5 || m == 0) {
-            profundidad = 0;
-            return 0;
-        }
+    // Convertir ambos a positivos
+    m = m < 0 ? -m : m;
+    n = n < 0 ? -n : n;
 
-        profundidad++;
-        return 0.1 * division(m * 10, n);
+    float resultado = divisionRec(m, n, 0);
+    return signo * resultado;
+}
+
+//Ejercicio 6
+/*6.	Se conoce que la mafia china es muy organizada y protege mucho a sus miembros, cuando deciden asistir
+a una reunión se dispone de una cantidad de chinos que asisten, y ellos se ubican de forma que al mirarlos
+frontalmente generan cierto respeto y temor. A continuación, se tiene una serie de posibles reuniones y su
+nivel y la apariencia que se tiene del grupo que va a la reunión vistos frontalmente:
+
+Nivel reunión	Vista frontal de la delegación
+		1 	        (-.-)
+		2 		 (-.(-.-).-)
+		3 	  (-.(-.(-.-).-).-)
+		4  (-.(-.(-.(-.-).-).-).-)
+
+*/
+
+char* reunionMafia(int nivel) {
+    if (nivel == 1) {
+        char* base = (char*)malloc(6);
+        strcpy(base, "(-.-)");
+        return base;
+    } else {
+        char* inner = reunionMafia(nivel - 1);
+        int len = strlen(inner) + 6;
+        char* result = (char*)malloc(len);
+
+        strcpy(result, "(-.");
+        strcat(result, inner);
+        strcat(result, ".-)");
+
+        free(inner);
+
+        return result;
     }
-    return 1 + division(m - n, n);
 }
 
 //ejercicio 7
-/*8.	Se tiene una cadena que representa una onda digital de señales L (Low) y H (High). Se pide mostrar
+/*7.	Se tiene una cadena que representa una onda digital de señales L (Low) y H (High). Se pide mostrar
 la onda que representa utilizando “_” y “|”.
 
 Ejemplo: Si se tiene la cadena HHHHLLLLHHHHHLLHHLL, su onda digital se puede ver algo así:
@@ -57,12 +89,28 @@ _ _ _ _            _ _ _ _ _      _ _
 
 */
 //char seniales[] == char * seniales;
-char * ondaDigital(char seniales[]){
+char* ondaDigital(char seniales[]) {
     int longitud = strlen(seniales);
-    char *senal;
-    senal = malloc(1000);
-    senal[0]= '\0';
-    return ondaDigitalRec(seniales, 0, longitud-1, senal);
+    char *senal = malloc(1000);
+    if (!senal) return NULL;
+    senal[0] = '\0';
+
+    return ondaDigitalRec(seniales, 0, longitud - 1, senal);
+}
+
+//Ejercicio 8
+/*8.	Definir una función recursiva que dado un conjunto devuelva una lista con los subconjuntos del mismo
+tales que la suma de los elementos de cada subconjunto sumen una cantidad dada.
+Por ejemplo:   Dado el conjunto A = {10, 3, 1, 7, 4, 2}. La lista de los conjuntos que sumen 7 sería:
+R = [{3, 4}, {1, 4, 2}, {7}]*/
+void subconjuntosQueSumanN(int conjunto[], int tamano, int n, char **output) {
+    static int contadorInterno;
+    contadorInterno = 0;
+    int temp[100];
+
+    encontrarSubconjuntos(conjunto, tamano, 0, 0, n, temp, 0, output, &contadorInterno);
+
+    output[contadorInterno] = NULL;
 }
 
 //Ejercicio 9
@@ -93,7 +141,7 @@ bool divisiblePor7(int n){
     int ultimo = n%10;
     int resto = n/10;
     int reducido = resto - (ultimo*2);
-    divisiblePor7(reducido);
+    return divisiblePor7(reducido);
 }
 
 //Ejercicio 10
@@ -117,7 +165,7 @@ Bomba: 5
 explosion(20, 5) => [4 3 2 2 1 1 1 1 5]
 */
 int* explosion(int n, int b) {
-    int *resultado = malloc(sizeof(int) * 100);
+    int *resultado = calloc(100, sizeof(int));
     int *pos = malloc(sizeof(int));
     *pos = 0;
 
