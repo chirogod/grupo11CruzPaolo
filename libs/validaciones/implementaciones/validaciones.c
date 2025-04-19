@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+#include "../../listas/headers/listas.h"
 int obtener_opcion_menu() {
     char entrada[100];
     int numero;
@@ -133,3 +133,24 @@ void pedirConjunto(int conjunto[], int *tamano) {
     }
 }
 
+Lista llenarLista(Lista lista){
+    char mensaje[100];
+    int valor;
+    int longitud = pedirNumeroNatural("Ingrese cuantos elementos tendra la lista: ");
+    for(int i = 1; i<=longitud;i++){
+        sprintf(mensaje, "Elemento[%d]: ", i);
+        valor = pedirEntero(mensaje);
+        TipoElemento te = te_crear(valor);
+        l_agregar(lista,te);
+    }
+    return lista;
+}
+
+void llenarDosListas(Lista l1, Lista l2){
+    printf("Ingrese dos listas para comenzar!\n");
+    printf("\n----Primer lista----\n");
+    llenarLista(l1);
+    printf("\n----Segunda lista----\n");
+    llenarLista(l2);
+    printf("\n\n");
+}

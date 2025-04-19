@@ -1,6 +1,8 @@
 #include "../headers/funciones.h"
 #include <ctype.h>
 #include "../headers/validaciones.h"
+#include "../../../02-trabajoPractico-Listas/tp_2_listas.h"
+
 //Ejercicio 1
 bool palindromoRec(char *palabra, int inicio, int final) {
     if (inicio >= final) {
@@ -239,4 +241,94 @@ void explosionRec(int n, int b, int *resultado, int *pos) {
         explosionRec(n1, b, resultado, pos);
         explosionRec(n2, b, resultado, pos);
     }
+}
+
+
+
+///////////////////// TP2 LISTAS
+void listasEjercicio2(){
+    Lista l1 = l_crear();
+    Lista l2 = l_crear();
+    llenarDosListas(l1,l2);
+
+    printf("Elementos de L2 que no estan en L1: \n");
+    Lista listaNoEstan = verElementosQueNoSeRepiten(l1, l2);
+    l_mostrar(listaNoEstan);
+
+    printf("\nElementos de L1 que no estan en L2: \n");
+    listaNoEstan = verElementosQueNoSeRepiten(l2, l1);
+    l_mostrar(listaNoEstan);
+
+    printf("\nElementos repetidos en ambas listas: \n");
+    Lista listaComunes = verElementosRepetidos(l1,l2);
+    l_mostrar(listaComunes);
+
+    float prom = promedio(l1);
+    printf("\nPromedio primer lista: %f\n", prom);
+
+    prom = promedio(l2);
+    printf("\nPromedio segunda lista: %f\n", prom);
+
+    ResultadoValorMinimo resultado = valorMinimo(l1,l2);
+    printf("\nEl valor minimo de la primer lista es: %d y su posicion es la: %d\n", resultado.valor, resultado.pos);
+    printf("\nEl valor minimo de la segunda lista es: %d y su posicion es la: %d\n", resultado.valor_2, resultado.pos_2);
+
+    printf("\n\n");
+
+
+}
+
+void listasEjercicio3(){
+    Lista l1 = l_crear();
+    Lista l2 = l_crear();
+    llenarDosListas(l1,l2);
+
+    ResultadosMul resultado = multiplo(l1,l2);
+
+    if(resultado.esMultiplo){
+        printf("L2 es multiplo de L1");
+        if(resultado.escalar){
+            printf(" y por un escalar: %d\n\n", resultado.numEscalar);
+        }else{
+            printf(" pero no por un escalar.\n\n");
+        }
+    }else{
+        printf("L2 NO es multiplo de L1\n\n");
+    }
+}
+
+void listasEjercicio4(){
+    Lista l1 = l_crear();
+    Lista l2 = l_crear();
+    llenarDosListas(l1,l2);
+
+    int resultado = CompararListas(l1,l2);
+    if(resultado == 1){
+        printf("L1 es mayor que L2!!");
+    }else if(resultado == 2){
+        printf("L2 es mayor que L1!!");
+    }else{
+        printf("L1 y L2 son iguales!!");
+    }
+    //FALTA DETERMINAR COMPLEJIDAD----------------------------------------------IMPORTANTE
+    printf("\n\n");
+}
+
+void listasEjercicio5(){
+    printf("No esta listo!!");
+}
+
+void listasEjercicio6(){
+    Lista l1 = l_crear();
+    Lista l2 = l_crear();
+    llenarDosListas(l1,l2);
+
+    bool resultado = esSublista(l1,l2);
+    if(resultado){
+        printf("L2 es sublista de L1");
+    }else{
+        printf("L2 NO es sublista de L1");
+    }
+    //FALTA DETERMINAR COMPLEJIDAD----------------------------------------------IMPORTANTE
+    printf("\n\n");
 }

@@ -33,3 +33,11 @@ void ejercicio9();
 //Ejercicio 10
 void ejercicio10();
 void explosionRec(int n, int b, int *resultado, int *pos);
+
+
+///////////////////////// TP2 LISTAS
+void listasEjercicio2();
+void listasEjercicio3();
+void listasEjercicio4();
+void listasEjercicio5();
+void listasEjercicio6();
