@@ -122,6 +122,35 @@ int pedirNumeroNatural(char *mensaje) {
     }
 }
 
+int pedirNumeroNaturalNoCero(char *mensaje) {
+    char linea[100];
+    int num;
+    char extra;
+
+    while (1) {
+        printf("%s", mensaje);
+
+        if (fgets(linea, sizeof(linea), stdin) == NULL) {
+            printf("Error al leer entrada. Intente de nuevo.\n");
+            continue;
+        }
+
+        linea[strcspn(linea, "\n")] = '\0';
+
+        if (sscanf(linea, "%d %c", &num, &extra) != 1) {
+            printf("Error: Ingrese solo numeros naturales (0 o mayor).\n");
+            continue;
+        }
+
+        if (num <= 0) {
+            printf("Error: No se permiten numeros negativos.\n");
+            continue;
+        }
+
+        return num;
+    }
+}
+
 void pedirConjunto(int conjunto[], int *tamano) {
     *tamano = pedirNumeroNatural("Ingrese la cantidad de elementos del conjunto: ");
 
@@ -152,5 +181,27 @@ void llenarDosListas(Lista l1, Lista l2){
     llenarLista(l1);
     printf("\n----Segunda lista----\n");
     llenarLista(l2);
+    printf("\n\n");
+}
+
+Lista llenarListaLong(Lista lista, int longi){
+    char mensaje[100];
+    int valor;
+    for(int i = 1; i<=longi;i++){
+        sprintf(mensaje, "Elemento[%d]: ", i);
+        valor = pedirEntero(mensaje);
+        TipoElemento te = te_crear(valor);
+        l_agregar(lista,te);
+    }
+    return lista;
+}
+
+void llenarDosListasIguales(Lista l1, Lista l2){
+    int longi = pedirNumeroNaturalNoCero("Para este ejercicio las listas deben tener la misma cantidad de elementos!\n Indique cuantos elementos tendran las listas: ");
+    printf("\n\n");
+    printf("\n----Primer lista----\n");
+    llenarListaLong(l1,longi);
+    printf("\n----Segunda lista----\n");
+    llenarListaLong(l2,longi);
     printf("\n\n");
 }

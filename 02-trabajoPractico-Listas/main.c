@@ -7,11 +7,11 @@ int main() {
     int ejercicio;
     while (1) {
         printf("----MENU----\n");
-        printf("2) Ejercicio 2.\n");
-        printf("3) Ejercicio 3.\n");
-        printf("4) Ejercicio 4.\n");
+        printf("2) Dadas 2 listas (L1 y L2) generar los informes pedidos.\n");
+        printf("3) Dadas 2 listas (L1 y L2) determinar si L2 es múltiplo de L1.\n");
+        printf("4) Dadas dos listas (L1 y L2),  compararlas.\n");
         printf("5) Ejercicio 5.\n");
-        printf("6) Ejercicio 6.\n");
+        printf("6) Dadas 2listas (L1 y L2), determinar si L2 es sublista de L1.\n");
 
         ejercicio = obtener_opcion_menu();
         printf("\n");

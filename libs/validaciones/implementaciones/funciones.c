@@ -270,8 +270,12 @@ void listasEjercicio2(){
     printf("\nPromedio segunda lista: %f\n", prom);
 
     ResultadoValorMinimo resultado = valorMinimo(l1,l2);
-    printf("\nEl valor minimo de la primer lista es: %d y su posicion es la: %d\n", resultado.valor, resultado.pos);
-    printf("\nEl valor minimo de la segunda lista es: %d y su posicion es la: %d\n", resultado.valor_2, resultado.pos_2);
+    if(resultado.pos != -1){
+        printf("\nEl valor minimo de la primer lista es: %d y su posicion es la: %d\n", resultado.valor, resultado.pos);
+    }
+    if(resultado.pos_2 != -1){
+        printf("\nEl valor minimo de la segunda lista es: %d y su posicion es la: %d\n", resultado.valor_2, resultado.pos_2);
+    }
 
     printf("\n\n");
 
@@ -300,7 +304,7 @@ void listasEjercicio3(){
 void listasEjercicio4(){
     Lista l1 = l_crear();
     Lista l2 = l_crear();
-    llenarDosListas(l1,l2);
+    llenarDosListasIguales(l1,l2);
 
     int resultado = CompararListas(l1,l2);
     if(resultado == 1){
@@ -310,12 +314,12 @@ void listasEjercicio4(){
     }else{
         printf("L1 y L2 son iguales!!");
     }
-    //FALTA DETERMINAR COMPLEJIDAD----------------------------------------------IMPORTANTE
+    printf("\nCOMPLEJIDAD ALGORITMICA: Al recorrer dos listas que tienen la misma cantidad de elementos 'n' y se recorre una unica vez cada lista, esta funcion tiene una complejidad lineal 'O(n)'. ");
     printf("\n\n");
 }
 
 void listasEjercicio5(){
-    printf("No esta listo!!");
+    printf("No esta listo!!\n\n");
 }
 
 void listasEjercicio6(){
@@ -329,6 +333,6 @@ void listasEjercicio6(){
     }else{
         printf("L2 NO es sublista de L1");
     }
-    //FALTA DETERMINAR COMPLEJIDAD----------------------------------------------IMPORTANTE
+    printf("\nCOMPLEJIDAD ALGORITMICA: Esta funcion tiene una complejidad de O(m*n) ya que se recorre todos los elementos de L2 y por cada vez hace una busqueda en L1. ");
     printf("\n\n");
 }

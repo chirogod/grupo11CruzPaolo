@@ -1,6 +1,7 @@
 #include "tp_2_listas.h"
 #include "../libs/listas/headers/listas.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 Lista verElementosQueNoSeRepiten(Lista l1, Lista l2){
     Lista listaNoRepetidos = l_crear();
@@ -73,37 +74,54 @@ typedef struct resultadoStruct
 */
 
 ResultadoValorMinimo valorMinimo(Lista l1, Lista l2){
+    int longitud1 = l_longitud(l1);
+    int longitud2 = l_longitud(l2);
+
     ResultadoValorMinimo resultado;
     int pos1 = 0, pos2 = 0;
-
-    TipoElemento primeroL1 = l_recuperar(l1,1);
-    resultado.valor = primeroL1->clave;
-    resultado.pos = 1;
-
-    TipoElemento primeroL2 = l_recuperar(l2,1);
-    resultado.valor_2 = primeroL2->clave;
-    resultado.pos_2 = 1;
-
+    TipoElemento primeroL1;
     TipoElemento x;
-    Iterador it1 = iterador(l1);
-    Iterador it2 = iterador(l2);
 
-    while(hay_siguiente(it1)){
-        pos1++;
-        x = siguiente(it1);
-        if(x->clave < resultado.valor){
-            resultado.valor = x->clave;
-            resultado.pos = pos1;
+    Iterador it1 = iterador(l1);
+    if(longitud1>0){
+        primeroL1 = l_recuperar(l1,1);
+        resultado.valor = primeroL1->clave;
+        resultado.pos = 1;
+        while(hay_siguiente(it1)){
+            pos1++;
+            x = siguiente(it1);
+            if(x->clave < resultado.valor){
+                resultado.valor = x->clave;
+                resultado.pos = pos1;
+            }
         }
+    }else{
+        resultado.valor = 0;
+        resultado.pos = -1;
+        printf("\nLa primer lista no tiene elementos, por ende no tiene valor minimo.\n");
     }
 
-    while(hay_siguiente(it2)){
-        pos2++;
-        x = siguiente(it2);
-        if(x->clave < resultado.valor_2){
-            resultado.valor_2 = x->clave;
-            resultado.pos_2 = pos2;
+
+    TipoElemento primeroL2;
+    if(longitud2>0){
+        primeroL2 = l_recuperar(l2,1);
+        resultado.valor_2 = primeroL2->clave;
+        resultado.pos_2 = 1;
+
+        Iterador it2 = iterador(l2);
+
+        while(hay_siguiente(it2)){
+            pos2++;
+            x = siguiente(it2);
+            if(x->clave < resultado.valor_2){
+                resultado.valor_2 = x->clave;
+                resultado.pos_2 = pos2;
+            }
         }
+    }else{
+        resultado.valor_2 = 0;
+        resultado.pos_2 = -1;
+        printf("\nLa segunda lista no tiene elementos, por ende no tiene valor minimo.\n");
     }
 
     return resultado;

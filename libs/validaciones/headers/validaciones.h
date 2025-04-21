@@ -4,10 +4,12 @@ int obtener_opcion_menu();
 int pedirEnteroEnRango(int min, int max);
 int pedirEntero(char *mensaje);
 int pedirNumeroNatural(char *mensaje);
+int pedirNumeroNaturalNoCero(char *mensaje);
 int pedirNumeroNaturalConjunto(char *mensaje);
 void pedirConjunto(int conjunto[], int *tamano);
 int pedirNumeroNoCero(char *mensaje);
 
 Lista llenarLista(Lista lista);
-
+Lista llenarListaLong(Lista lista, int longi);
 void llenarDosListas(Lista l1, Lista l2);
+void llenarDosListasIguales(Lista l1, Lista l2);
