@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include "../headers/validaciones.h"
 #include "../../../02-trabajoPractico-Listas/tp_2_listas.h"
+#include "../../../03-trabajoPractico-Pilas/tp_3_pilas.h"
 
 //Ejercicio 1
 bool palindromoRec(char *palabra, int inicio, int final) {
@@ -334,5 +335,166 @@ void listasEjercicio6(){
         printf("L2 NO es sublista de L1");
     }
     printf("\nCOMPLEJIDAD ALGORITMICA: Esta funcion tiene una complejidad de O(m*n) ya que se recorre todos los elementos de L2 y por cada vez hace una busqueda en L1. ");
+    printf("\n\n");
+}
+
+///////////////////////////////////////TP3 PILAS
+void pilasEjercicio2(){
+    Pila p = p_crear();
+    printf("Cargar pila:\n");
+    llenarPila(p);
+    int longitud = contadorElemPila(p);
+    int clave2a = pedirEntero("\nIngrese la clave a buscar: ");
+    if(p_ej2_existeclave(p,clave2a)){
+        printf("\nLa clave '%d' SI existe en la pila!\n\n",clave2a);
+    }else{
+        printf("\nLa clave '%d' NO existe en la pila!\n\n",clave2a);
+    }
+
+    printf("Ahora para el ejercicio 2b, se colocara en una posicion ordinal dada, un elemento dado: \n");
+    int posicionordinal = pedirEnteroEnRango(1,longitud);
+    TipoElemento elem2b = pedirTE("Ingrese el elemento a agregar: ");
+    Pila pila2b = p_ej2_colocarelemento(p,posicionordinal,elem2b);
+    printf("La pila con el nuevo elemento: ");
+    p_mostrar(pila2b);
+    printf("La pila original sin perderse: ");
+    p_mostrar(p);
+    printf("\n\n");
+
+    printf("Ahora para el ejercicio 2c, se eliminar la primer ocurrencia de una clave dada: \n");
+    int clave2c = pedirEntero("Clave a eliminar: ");
+    Pila p2c = p_ej2_eliminarclave(p,clave2c);
+    printf("La pila con la clave eliminada: ");
+    p_mostrar(p2c);
+    printf("La pila original sin perderse: ");
+    p_mostrar(p);
+    printf("\n\n");
+
+    printf("Ahora para el ejercicio 2e, se duplicara la pila: \n");
+    Pila p2e = p_ej2_duplicar(p);
+    printf("La copia de la pila: ");
+    p_mostrar(p2e);
+    printf("La pila original sin perderse: ");
+    p_mostrar(p);
+    printf("\n\n");
+
+    printf("Ahora para el ejercicio 2f, se contaran los elementos de la pila: \n");
+    int elementosPila1 = p_ej2_cantidadelementos(p);
+    printf("Elementos: %d\n", elementosPila1);
+    p_mostrar(p2e);
+    printf("La pila original sin perderse: ");
+    p_mostrar(p);
+    printf("\n\n");
+}
+
+void pilasEjercicio3(){
+    printf("Ejercicio de comparar pilas por su clave!\n\n");
+    Pila p1 = p_crear();
+    printf("Cargar primer pila:\n");
+    llenarPila(p1);
+    Pila p2 = p_crear();
+    printf("Cargar segunda pila:\n");
+    llenarPila(p2);
+    printf("\n\npilas originales\n");
+    p_mostrar(p1);
+    p_mostrar(p2);
+    int longp1 = contadorElemPila(p1);
+    int longp2 = contadorElemPila(p2);
+    bool resultado = false;
+    if(longp1==longp2){
+        resultado = p_ej3_iguales(p1,p2);
+    }
+    if(resultado){
+        printf("Las pilas son exactamente iguales!");
+    }else{
+        printf("Las pilas son diferentes!");
+    }
+    printf("\n\npilas originales sin perderse\n");
+    p_mostrar(p1);
+    p_mostrar(p2);
+    printf("\n\nComplejidad Algoritmica: O(n) , n es el numero de elementos de las pilas, teniendo ambas la misma cantidad.\n");
+    printf("\n\n");
+}
+
+void pilasEjercicio4(){
+    printf("Ejercicio 4: Convertir numero entero en base decimal en la base deseada.\n\n");
+    char* res;
+    int decimal, base;
+    decimal = pedirEntero("Ingrese numero a convertir: ");
+    printf("\nIngrese base: ");
+    base = pedirEnteroEnRango(2,16);
+    res = p_ej4_cambiarbase(decimal, base);
+    printf("\n'%d' en base '%d' es: %s\n",decimal,base,res);
+    printf("\nComplejidad algoritmica: O(log(n))\n\n");
+}
+
+void pilasEjercicio5(){
+    printf("En este ejercicio vamos a invertir una pila!\nIngresar la pila: \n\n");
+    Pila p = p_crear();
+    llenarPila(p);
+    printf("\n");
+    p_mostrar(p);
+    printf("\n");
+    Pila resultado = p_ej5_invertir(p);
+    printf("Pila invertida: \n");
+    p_mostrar(resultado);
+    printf("\nPila original: \n");
+    p_mostrar(p);
+    printf("\nComplejidad Algoritmica: O(n) , n es el numero de elementos de la pila.\n");
+    printf("\n\n");
+}
+
+void pilasEjercicio6(){
+    printf("En este ejercicio vamos a eliminar todas las ocurrencias de una clave en una pila!\nIngresar la pila: \n\n");
+    Pila p = p_crear();
+    llenarPila(p);
+    printf("\n");
+    p_mostrar(p);
+    printf("\n");
+    int clave = pedirEntero("Ingresa la clave a eliminar todas las ocurrencias: ");
+    printf("\n");
+    Pila resultado = p_ej6_eliminarclave(p,clave);
+    printf("Pila sin las claves: \n");
+    p_mostrar(resultado);
+    printf("\nPila original: \n");
+    p_mostrar(p);
+    printf("\nComplejidad Algoritmica: O(n) .\n");
+    printf("\n\n");
+
+}
+
+void pilasEjercicio7(){
+    printf("Ejercicio de ver elementos en comun de dos pilas!\n\n");
+    Pila p1 = p_crear();
+    printf("Cargar primer pila:\n");
+    llenarPila(p1);
+    Pila p2 = p_crear();
+    printf("\nCargar segunda pila:\n");
+    llenarPila(p2);
+    printf("\n\npilas origins\n");
+    p_mostrar(p1);
+    p_mostrar(p2);
+    Pila resultado = p_ej7_elementoscomunes(p1,p2);
+    printf("\n\nElementos en comun: \n");
+    p_mostrar(resultado);
+    printf("\n\nComplejidad algoritmica: O(n*m) donde n es el numero de elementos de la primer pila, y m es el numero de elementos de la segunda pila.\n");
+    printf("\n\npilas origins\n");
+    p_mostrar(p1);
+    p_mostrar(p2);
+    printf("\n\n");
+}
+
+void pilasEjercicio8(){
+    printf("Ejercicio de contar elementos repetidos!\n\n");
+    Pila p1 = p_crear();
+    printf("Cargar pila:\n");
+    llenarPila(p1);
+    p_mostrar(p1);
+    Pila resultado = p_ej8_sacarrepetidos(p1);
+    printf("\n\nElementos repetidos: \n");
+    p_mostrar(resultado);
+    printf("\n\nComplejidad algoritmica: .\n");
+    printf("\n\nPila original\n");
+    p_mostrar(p1);
     printf("\n\n");
 }

@@ -8,7 +8,7 @@ int main() {
     while (1) {
         printf("----MENU----\n");
         printf("2) Dadas 2 listas (L1 y L2) generar los informes pedidos.\n");
-        printf("3) Dadas 2 listas (L1 y L2) determinar si L2 es mÃºltiplo de L1.\n");
+        printf("3) Dadas 2 listas (L1 y L2) determinar si L2 es múltiplo de L1.\n");
         printf("4) Dadas dos listas (L1 y L2),  compararlas.\n");
         printf("5) Ejercicio 5.\n");
         printf("6) Dadas 2listas (L1 y L2), determinar si L2 es sublista de L1.\n");
@@ -36,7 +36,7 @@ int main() {
                 listasEjercicio6();
                 break;
             default:
-                printf("Ese ejercicio no existe, solo del 2 al 6.\n\n");
+                printf("Ese ejercicio no existe, solo del 2 al 3.\n\n");
         }
     }
 }

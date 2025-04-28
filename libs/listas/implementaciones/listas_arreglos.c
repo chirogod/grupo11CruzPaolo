@@ -1,8 +1,6 @@
-//#include "D:\Mario\Prog_2_2009\2024\TADs\Listas\listas.h"
 #include "../headers/listas.h"
 #include <stdlib.h>
 #include <stdio.h>
-//#include "D:\Mario\Prog_2_2009\2024\TADs\Tipos\tipo_elemento.h"
 #include "../../tipoElemento/headers/tipo_elemento.h"
 
 static const int TAMANIO_MAXIMO = 100;

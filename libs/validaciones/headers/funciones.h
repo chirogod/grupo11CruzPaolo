@@ -41,3 +41,12 @@ void listasEjercicio3();
 void listasEjercicio4();
 void listasEjercicio5();
 void listasEjercicio6();
+
+//////////////////////////TP3 LISTAS
+void pilasEjercicio2();
+void pilasEjercicio3();
+void pilasEjercicio4();
+void pilasEjercicio5();
+void pilasEjercicio6();
+void pilasEjercicio7();
+void pilasEjercicio8();

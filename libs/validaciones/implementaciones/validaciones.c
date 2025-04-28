@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "../../listas/headers/listas.h"
+#include "../../pilas/headers/pilas.h"
 int obtener_opcion_menu() {
     char entrada[100];
     int numero;
@@ -204,4 +205,79 @@ void llenarDosListasIguales(Lista l1, Lista l2){
     printf("\n----Segunda lista----\n");
     llenarListaLong(l2,longi);
     printf("\n\n");
+}
+
+void llenarPila(Pila pila) {
+    char entrada[20];
+    bool continuar = true;
+
+    while (continuar) {
+        printf("Ingrese un entero o '/' para terminar: ");
+        scanf("%s", entrada);
+        while (getchar() != '\n');
+        if (strcmp(entrada, "/") == 0) {
+            continuar = false;
+        } else {
+            int numero;
+            if (sscanf(entrada, "%d", &numero) == 1) {
+                TipoElemento te = te_crear(numero);
+                if (!p_apilar(pila, te)) {
+                    printf("La pila esta llena. No se puede apilar mas.\n");
+                    continuar = false;
+                }
+            } else {
+                printf("Entrada invalida. Intente de nuevo.\n");
+            }
+        }
+    }
+}
+
+int contadorElemPila(Pila pila){
+    Pila paux = p_crear();
+    int contador = 0;
+    TipoElemento x;
+    while(!p_es_vacia(pila)){
+        x = p_desapilar(pila);
+        contador++;
+        p_apilar(paux,x);
+    }
+    while(!p_es_vacia(paux)){
+        x = p_desapilar(paux);
+        p_apilar(pila,x);
+    }
+    return contador;
+}
+
+Pila copiarPila(Pila pila){
+    Pila pila2 = p_crear();
+    Pila paux = p_crear();
+    TipoElemento x;
+    while(!p_es_vacia(pila)){
+        x = p_desapilar(pila);
+        p_apilar(paux,x);
+    }
+    while(!p_es_vacia(paux)){
+        x = p_desapilar(paux);
+        p_apilar(pila,x);
+        p_apilar(pila2,x);
+    }
+
+    return pila2;
+}
+
+TipoElemento pedirTE(char *mensaje){
+    int numero;
+    char linea[100];
+    while (1) {
+        printf("%s", mensaje);
+        if (fgets(linea, sizeof(linea), stdin) != NULL) {
+            if (sscanf(linea, "%d", &numero) == 1) {
+                TipoElemento x = te_crear(numero);
+                return x;
+            } else {
+                printf("Entrada invalida. Ingrese un numero entero valido.\n");
+            }
+        }
+    }
+
 }
