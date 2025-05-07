@@ -2,9 +2,15 @@
 #define TP_COLAS_H
 
 #include <stdbool.h>
-#include "../libs/colas/colas.h"
-#include "../libs/pilas/pilas.h"
-#include "../libs/listas/listas.h"
+#include "../libs/colas/headers/colas.h"
+#include "../libs/pilas/headers/pilas.h"
+#include "../libs/listas/headers/listas.h"
+
+/**
+	PARA TODOS LOS EJERCICIOS PERMITIR UNA CARGA MANUAL PARA LOS TESTING
+	LA COMPLEJIDAD VA CON UN PRINTF AL FINAL DE MOSTRAR LOS RESULTADOS
+ */
+
 
 /**
     2.	Resolver los siguientes puntos:
@@ -16,7 +22,7 @@ bool c_ej2_existeclave(Cola c, int clave);
 
 //  b.	Agregar un nuevo elemento en una posición dada (colarse).
 // Retorna la nueva cola con el elemento insertado, caso contrario la cola original recibida.
-Cola c_ej2_colarelemento(Cola c, int posicionordinal);
+Cola c_ej2_colarelemento(Cola c, int posicionordinal, TipoElemento X);
 
 //  c.	Dado un elemento sacarlo de la cola todas las veces que aparezca.
 // Retorna la nueva cola sin el/los elemento/s, caso contrario la cola original recibida.
@@ -34,12 +40,14 @@ Cola c_ej2_copiar(Cola c);
 // Retorna la cola al reves (invertida), no debe perserse la original. Si es vacia retorna vacia.
 Cola c_ej2_invertir(Cola c);
 
+
 /**
 3.	Dadas dos colas, determinar si sus contenidos son iguales tanto en posición como en datos (solo comparar por la clave),
 	sin destruirlas. Utilizar para la resolución del problema una sola cola auxiliar.
  */
 // retorna true si son exactamente iguales, caso contrario retorna false.
 bool c_ej3_iguales(Cola c1, Cola c2);
+
 
 /**
 4.	Dada una cola de números enteros, no ordenada,
@@ -49,15 +57,16 @@ bool c_ej3_iguales(Cola c1, Cola c2);
 // Retorna la cola con las claves que no tienen repeticiones, caso contrario si todas se repiten retorna cola vacia.
 Cola  c_ej4_colanorepetidos(Cola c);
 
+
 /**
 5.	Dada una cola de valores enteros no repetidos y mayores o iguales a 2,
 	obtener todos los valores que son Divisores Totales o parciales.
 	Se dice que un valor es Divisor Total si permite dividir a todos los demás valores de la cola en forma exacta.
 	Se dice que un divisor es parcial si al menos puede dividir en forma exacta al menos al 50% de la cola (es decir a la mitad de los elementos).
  */
-// retorna el valor del divisor total o parcial en la función.   Si no hay ni divisor total ni parcial retornar "0".
-// En la variable de referencia "&fuetotal" debe venir solo con true cual el divisor es total, caso contrario false.
-int c_ej5_divisortotal(Cola c, bool *fuetotal);
+// retorna una cola con el/los divisor/es total/es o parcial/es.   Si no hay ni divisor total ni parcial retornar cola vacia.
+// Usar el atributo valor para indicar cuando el divisor es total(true) o parcial.  Indicar con true cuando es total, caso contrario false.
+Cola c_ej5_divisortotal(Cola c);
 
 
 /**
@@ -67,6 +76,9 @@ int c_ej5_divisortotal(Cola c, bool *fuetotal);
  */
 // retornar una lista con los valores comunes segun las especificaciones del ejercicio.
 // Si no existen valores comunes retornar la lista vacia.
+// Usar el atributo valor para enviar las 2 posiciones como un *char.
+// Ejemplo: si “P” = (2,5,8,19,3,4) y “C” = (4, 18, 12, 5, 6) la lista tendría L = (5:2:4, 4:6:5). 2 y 4 deben venir en el valor.
+// "2:4" indicara que el "5" esta en la segunda posicion de "P" y en la cuarta de "C".
 Lista c_ej6_comunesapilaycola(Pila p, Cola c);
 
 
@@ -82,5 +94,7 @@ Lista c_ej6_comunesapilaycola(Pila p, Cola c);
 // Segun el ejemplo el primer item de la cola seria clave: 3, void* "Cliente 1 Cola 3".
 // Si las colas estan vacias, retornar cola vacia.
 Cola c_ej7_atenderclientes(Cola c1, Cola c2, Cola c3, int tiempoatencion);
+
+
 
 #endif // TP_COLAS_H

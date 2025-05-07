@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "../../listas/headers/listas.h"
 #include "../../pilas/headers/pilas.h"
+#include "../../colas/headers/colas.h"
 int obtener_opcion_menu() {
     char entrada[100];
     int numero;
@@ -280,4 +281,55 @@ TipoElemento pedirTE(char *mensaje){
         }
     }
 
+}
+
+void llenarCola(Cola cola){
+    char entrada[20];
+    bool continuar = true;
+
+    while (continuar) {
+        printf("Ingrese un entero o '/' para terminar: ");
+        scanf("%s", entrada);
+        while (getchar() != '\n');
+        if (strcmp(entrada, "/") == 0) {
+            continuar = false;
+        } else {
+            int numero;
+            if (sscanf(entrada, "%d", &numero) == 1) {
+                TipoElemento te = te_crear(numero);
+                if (!c_encolar(cola, te)) {
+                    printf("La cola esta llena. No se puede encolar mas.\n");
+                    continuar = false;
+                }
+            } else {
+                printf("Entrada invalida. Intente de nuevo.\n");
+            }
+        }
+    }
+}
+
+int longitudCola(Cola cola){
+    int contador = 0;
+    Cola caux = c_crear();
+    TipoElemento x;
+    while(!c_es_vacia(cola)){
+        contador++;
+        x = c_desencolar(cola);
+        c_encolar(caux,x);
+    }
+    while(!c_es_vacia(caux)){
+        x = c_desencolar(caux);
+        c_encolar(cola,x);
+    }
+    return contador;
+}
+
+void mostrar_lista_posiciones(Lista l) {
+    Iterador it = iterador(l);
+    TipoElemento te;
+    printf("Elementos comunes (clave:pos_pila:pos_cola):\n");
+    while (hay_siguiente(it)) {
+        te = siguiente(it);
+        printf("%d:%s\n", te->clave, (char*) te->valor);
+    }
 }

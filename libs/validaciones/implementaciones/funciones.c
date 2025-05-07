@@ -3,6 +3,7 @@
 #include "../headers/validaciones.h"
 #include "../../../02-trabajoPractico-Listas/tp_2_listas.h"
 #include "../../../03-trabajoPractico-Pilas/tp_3_pilas.h"
+#include "../../../04-trabajoPractico-Colas/tp_4_colas.h"
 
 //Ejercicio 1
 bool palindromoRec(char *palabra, int inicio, int final) {
@@ -497,4 +498,130 @@ void pilasEjercicio8(){
     printf("\n\nPila original\n");
     p_mostrar(p1);
     printf("\n\n");
+}
+
+/*--------------------COLAS-------------------*/
+void colasEjercicio2(){
+    printf("Bienvenido al ejercicio 2! Primero ingrese la cola: \n");
+    Cola cola = c_crear();
+    llenarCola(cola);
+    c_mostrar(cola);
+    int longitud = longitudCola(cola);
+    printf("\na)Ingresar un elemento para ver si se encuentra en la cola!\n");
+    int elemento = pedirEntero("Ingresar la clave a buscar: ");
+    bool encontrado = c_ej2_existeclave(cola,elemento);
+    if(encontrado){
+        printf("La clave '%d' SI existe en la cola!!",elemento);
+    }else{
+        printf("La clave '%d' NO existe en la cola!!",elemento);
+    }
+    printf("\n\n");
+    printf("\nb)Ahora agregar un elemento en una posicion!");
+    if(!c_es_llena(cola)){
+        TipoElemento elementoAgregar = pedirTE("\nElemento a agregar: ");
+        int posicion = pedirEnteroEnRango(1,longitud+1);
+        Cola agregar = c_ej2_colarelemento(cola,posicion,elementoAgregar);
+        printf("\nCola con el elemento agregado: \n");
+        c_mostrar(agregar);
+        printf("\nCola original: \n");
+        c_mostrar(cola);
+    }else{
+        printf(" Pero la cola esta llena no se podra encolar otro elemento.\n\n");
+    }
+
+    printf("c) Dado un elemento sacarlo todas las veces que aparezca en la cola!\n");
+    int claveEliminar = pedirEntero("Clave a eliminar: ");
+    Cola sinClave = c_ej2_sacarelemento(cola,claveEliminar);
+    printf("Cola sin la clave dada:\n");
+    c_mostrar(sinClave);
+    printf("\nCola original:\n");
+    c_mostrar(cola);
+
+    printf("d) Contar los elementos de la cola!\n");
+    int elementosCola = c_ej2_contarelementos(cola);
+    printf("La cola tiene %d elementos.\n", elementosCola);
+    printf("\nCola original:\n");
+    c_mostrar(cola);
+
+}
+
+void colasEjercicio3(){
+    printf("Para este ejercicio, dada dos colas, determinaremos si son iguales!\nIngrese la primer cola:\n");
+    Cola c1 = c_crear();
+    llenarCola(c1);
+    c_mostrar(c1);
+    printf("\nLlene la segunda cola:\n");
+    Cola c2 = c_crear();
+    llenarCola(c2);
+    c_mostrar(c2);
+    bool resultado = c_ej3_iguales(c1,c2);
+    if(resultado){
+        printf("Las colas son iguales!!\n");
+    }else{
+        printf("Las colas NO son iguales!!\n");
+    }
+    printf("\nColas originales:\n");
+    c_mostrar(c1);
+    c_mostrar(c2);
+    printf("\nLa funcion tiene una complejidad algoritmica de O(n).\n\n");
+}
+
+void colasEjercicio4(){
+    printf("Para este ejercicio, dada una cola, generaremos otra con los elementos no repetidos!\nIngrese la cola:\n");
+    Cola cola = c_crear();
+    llenarCola(cola);
+    c_mostrar(cola);
+    Cola res = c_ej4_colanorepetidos(cola);
+    printf("Cola de los no repetidos: \n");
+    c_mostrar(res);
+    printf("\nCola original: \n");
+    c_mostrar(cola);
+    printf("\nLa funcion tiene una complejidad algoritmica de O(n^2)\n\n");
+}
+
+void colasEjercicio5(){
+    printf("Para este ejercicio, dada una cola(de elementos mayores a 2 y no repetidos!!!)\nobtendremos los divisores totales o parciales que haya.\nLlenar la cola: \n");
+    Cola cola = c_crear();
+    llenarCola(cola);
+    c_mostrar(cola);
+    Cola res = c_ej5_divisortotal(cola);
+    printf("Divisores parciales y/o totales: \n");
+    c_mostrar(res);
+    printf("\nCola original: \n");
+    c_mostrar(cola);
+    printf("\nLa funcion tiene una complejidad algoritmica de O(n^2)\n\n");
+}
+
+void colasEjercicio6(){
+    printf("Para este ejercicio, dada una pila y una cola determinar elementos en comun y en que posiciones se encontraron .\nLlenar la pila: \n");
+    Pila pila = p_crear();
+    llenarPila(pila);
+    p_mostrar(pila);
+    Cola cola = c_crear();
+    llenarCola(cola);
+    c_mostrar(cola);
+
+    Lista res = c_ej6_comunesapilaycola(pila,cola);
+    mostrar_lista_posiciones(res);
+    printf("\nCola original: \n");
+    c_mostrar(cola);
+    printf("\nPila original: \n");
+    p_mostrar(pila);
+    printf("\nLa funcion tiene una complejidad algoritmica de O(n*m)\n\n");
+}
+
+void colasEjercicio7(){
+    printf("Para este ejercicio, dada tres colas y `q` cantidad de minutos,\ninformar el orden en que fueron atendidos los clientes\n\n");
+    Cola c1 = c_crear();
+    Cola c2 = c_crear();
+    Cola c3 = c_crear();
+    printf("Primer cola:\n");
+    llenarCola(c1);
+    printf("Segunda cola:\n");
+    llenarCola(c2);
+    printf("Tercer cola:\n");
+    llenarCola(c3);
+    int tiempo = pedirNumeroNatural("Ingresar tiempo(>0): ");
+    Cola res = c_ej7_atenderclientes(c1,c1,c3,tiempo);
+    c_mostrar(res);
 }

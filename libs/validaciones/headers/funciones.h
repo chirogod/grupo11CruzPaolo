@@ -50,3 +50,11 @@ void pilasEjercicio5();
 void pilasEjercicio6();
 void pilasEjercicio7();
 void pilasEjercicio8();
+
+//////////////////////////TP4 COLAS
+void colasEjercicio2();
+void colasEjercicio3();
+void colasEjercicio4();
+void colasEjercicio5();
+void colasEjercicio6();
+void colasEjercicio7();
